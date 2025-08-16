@@ -76,3 +76,36 @@ ingress:
       secretName: "tls-secret"
       crt: ""
       key: ""
+
+#
+# Postgres configuration
+#
+database:
+  secretName: "postgres"
+  host: "postgres"
+  port: 5432
+  username: postgres
+  password: postgres
+  ssl: false
+  local:
+    enabled: true
+    version: 14.15-alpine3.21
+    maxConnections: "1000"
+    sharedBuffers: 1024MB
+    size: 4Gi
+
+#
+# RabbitMQ configuration
+#
+rabbitmq:
+  secretName: "rabbitmq"
+  host: "rabbitmq"
+  port: 5672
+  managementPort: 15672
+  username: rabbitmq
+  password: rabbitmq
+  protocol: amqp
+  local:
+    enabled: true
+    version: 3.13.7-management-alpine
+    size: 2Gi
