@@ -27,3 +27,52 @@ api:
     requests:
       cpu: 100m
       memory: 128Mi
+
+#
+# Ingress configuration
+#
+ingress:
+  enabled: true
+
+  #
+  # Specify the name of the static IP address
+  # Required when ingress.className=gce
+  #
+  staticIpName: ""
+
+  #
+  # Set the Ingress class:
+  # - gce: when deploying chart on GKE
+  # - traefik: when deploying on VM with k3s
+  #
+  className: "gce"
+
+  #
+  # SSL Configuration
+  #
+  ssl:
+    enabled: true
+    type: "google"
+
+    #
+    # Use a Google-managed certificate.
+    # Requires the name of the Google managed certificate in GCP
+    #
+    google:
+      certName: ""
+
+    #
+    # Use a ALB certificate.
+    #
+    alb:
+      certName: ""
+
+    #
+    # Provide a custom certificate managed by yourself.
+    # Requires the fullchain certificate and the private key used to generate it,
+    # which will be stored in a Kubernetes secret for usage.
+    #
+    custom:
+      secretName: "tls-secret"
+      crt: ""
+      key: ""
