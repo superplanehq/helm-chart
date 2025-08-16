@@ -1,0 +1,29 @@
+# Default values for superplane.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  registry: ghcr.io/superplanehq
+  name: superplane
+  pullPolicy: IfNotPresent
+  pullSecrets: []
+
+workers:
+  replicas: 1
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+api:
+  replicas: 1
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi

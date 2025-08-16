@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-workers
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: superplane
+    service: {{ .Chart.Name }}-workers
+spec:
+  replicas: {{ .Values.workers.replicas }}
+  selector:
+    matchLabels:
+      app: superplane
+      service: {{ .Chart.Name }}-workers
+  template:
+    metadata:
+      name: {{ .Chart.Name }}-workers
+      labels:
+        app: superplane
+        service: {{ .Chart.Name }}-workers
+    spec:
+      {{- with .Values.image.pullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}-workers
+          image: "{{ .Values.image.registry }}/{{ .Values.image.name }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          securityContext:
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            capabilities:
+              drop: [ALL]
+
+          {{- with .Values.workers.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
