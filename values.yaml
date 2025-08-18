@@ -10,6 +10,7 @@ image:
 
 workers:
   replicas: 1
+  dbPoolSize: 5
   resources:
     limits:
       cpu: 100m
@@ -20,6 +21,7 @@ workers:
 
 api:
   replicas: 1
+  dbPoolSize: 5
   resources:
     limits:
       cpu: 100m
@@ -27,6 +29,31 @@ api:
     requests:
       cpu: 100m
       memory: 128Mi
+
+domain:
+  name: ""
+  configMapName: "base-domain"
+
+authentication:
+  secretName: authentication
+  github:
+    enabled: true
+    clientId: ""
+    clientSecret: ""
+
+#
+# Key used to encrypt sensitive values before storing them in the database.
+#
+encryption:
+  secretName: encryption
+  key: ""
+
+#
+# Secret used to sign JWT tokens
+#
+jwt:
+  secretName: jwt
+  secret: ""
 
 #
 # Ingress configuration

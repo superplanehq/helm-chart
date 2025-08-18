@@ -2,6 +2,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Chart.Name }}-api
+  annotations:
+    cloud.google.com/backend-config: '{"default": "ingress-backend-config"}'
+    cloud.google.com/neg: '{"ingress": true}'
 spec:
   type: ClusterIP
   clusterIP: None
@@ -42,6 +45,41 @@ spec:
         - name: {{ .Chart.Name }}-api
           image: "{{ .Values.image.registry }}/{{ .Values.image.name }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.domain.configMapName }}
+            - secretRef:
+                name: {{ .Values.database.secretName }}
+            - secretRef:
+                name: {{ .Values.rabbitmq.secretName }}
+            - secretRef:
+                name: {{ .Values.authentication.secretName }}
+            - secretRef:
+                name: {{ .Values.encryption.secretName }}
+            - secretRef:
+                name: {{ .Values.jwt.secretName }}
+          env:
+            - name: START_PUBLIC_API
+              value: "yes"
+            - name: START_INTERNAL_API
+              value: "yes"
+            - name: START_GRPC_GATEWAY
+              value: "true"
+            - name: PUBLIC_API_BASE_PATH
+              value: "/api/v1"
+            - name: SWAGGER_BASE_PATH
+              value: "/app/api/swagger"
+            - name: RBAC_MODEL_PATH
+              value: /app/rbac/rbac_model.conf
+            - name: RBAC_ORG_POLICY_PATH
+              value: /app/rbac/rbac_org_policy.csv
+            - name: RBAC_CANVAS_POLICY_PATH
+              value: /app/rbac/rbac_canvas_policy.csv
+            - name: APPLICATION_NAME
+              value: superplane
+            - name: DB_POOL_SIZE
+              value: {{ .Values.api.dbPoolSize }}
+
           ports:
             - name: http
               containerPort: 8000

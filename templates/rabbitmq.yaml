@@ -7,12 +7,9 @@ metadata:
     app: rabbitmq
     product: semaphoreci
 data:
-  protocol: {{ .Values.rabbitmq.protocol | b64enc }}
-  host: {{ .Values.rabbitmq.host | b64enc }}
-  port: {{ .Values.rabbitmq.port | toString | b64enc }}
-  username: {{ .Values.rabbitmq.username | b64enc }}
-  password: {{ .Values.rabbitmq.password | b64enc }}
-  amqp-url: {{ printf "%s://%s:%s@%s:%s?verify=verify_none" .Values.rabbitmq.protocol .Values.rabbitmq.username .Values.rabbitmq.password .Values.rabbitmq.host (toString .Values.rabbitmq.port) | b64enc }}
+  RABBITMQ_USER: {{ .Values.rabbitmq.username }}
+  RABBITMQ_PASSWORD: {{ .Values.rabbitmq.password }}
+  RABBITMQ_URL: {{ printf "%s://%s:%s@%s:%s?verify=verify_none" .Values.rabbitmq.protocol .Values.rabbitmq.username .Values.rabbitmq.password .Values.rabbitmq.host (toString .Values.rabbitmq.port) | b64enc }}
 {{- if .Values.rabbitmq.local.enabled }}
 ---
 apiVersion: apps/v1
@@ -46,12 +43,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: rabbitmq
-                  key: username
+                  key: RABBITMQ_USER
             - name: RABBITMQ_DEFAULT_PASS
               valueFrom:
                 secretKeyRef:
                   name: rabbitmq
-                  key: password
+                  key: RABBITMQ_PASSWORD
           volumeMounts:
             - name: rabbitmq-storage
               mountPath: /var/lib/rabbitmq
