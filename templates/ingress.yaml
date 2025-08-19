@@ -44,7 +44,7 @@ spec:
 {{- end }}
   defaultBackend:
     service:
-      name: {{ .Chart.Name }}-api
+      name: {{ .Release.Name }}-api
       port:
         number: 8000
   rules:
@@ -55,7 +55,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: {{ .Chart.Name }}-api
+            name: {{ .Release.Name }}-api
             port:
               number: 8080
 ---

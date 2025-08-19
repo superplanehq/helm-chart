@@ -1,15 +1,17 @@
+{{- if eq .Values.rabbitmq.secretName "" }}
 apiVersion: v1
 kind: Secret
 metadata:
-  name: {{ .Values.rabbitmq.secretName }}
+  name: {{ include "secrets.rabbitmq.name" . }}
   namespace: {{ .Release.Namespace }}
   labels:
     app: rabbitmq
     product: semaphoreci
 data:
-  RABBITMQ_USER: {{ .Values.rabbitmq.username }}
-  RABBITMQ_PASSWORD: {{ .Values.rabbitmq.password }}
+  RABBITMQ_USER: {{ .Values.rabbitmq.username | b64enc }}
+  RABBITMQ_PASSWORD: {{ .Values.rabbitmq.password | b64enc }}
   RABBITMQ_URL: {{ printf "%s://%s:%s@%s:%s?verify=verify_none" .Values.rabbitmq.protocol .Values.rabbitmq.username .Values.rabbitmq.password .Values.rabbitmq.host (toString .Values.rabbitmq.port) | b64enc }}
+{{- end }}
 {{- if .Values.rabbitmq.local.enabled }}
 ---
 apiVersion: apps/v1
@@ -42,12 +44,12 @@ spec:
             - name: RABBITMQ_DEFAULT_USER
               valueFrom:
                 secretKeyRef:
-                  name: rabbitmq
+                  name: {{ include "secrets.rabbitmq.name" . }}
                   key: RABBITMQ_USER
             - name: RABBITMQ_DEFAULT_PASS
               valueFrom:
                 secretKeyRef:
-                  name: rabbitmq
+                  name: {{ include "secrets.rabbitmq.name" . }}
                   key: RABBITMQ_PASSWORD
           volumeMounts:
             - name: rabbitmq-storage

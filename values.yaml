@@ -35,7 +35,7 @@ domain:
   configMapName: "base-domain"
 
 authentication:
-  secretName: authentication
+  secretName: ""
   github:
     enabled: true
     clientId: ""
@@ -45,18 +45,18 @@ authentication:
 # Key used to encrypt sensitive values before storing them in the database.
 #
 encryption:
-  secretName: encryption
+  secretName: ""
   key: ""
 
 #
 # Secret used to sign JWT tokens
 #
 jwt:
-  secretName: jwt
+  secretName: ""
   secret: ""
 
 session:
-  secretName: session
+  secretName: ""
   key: ""
 
 #
@@ -112,7 +112,7 @@ ingress:
 # Postgres configuration
 #
 database:
-  secretName: "postgres"
+  secretName: ""
   host: "postgres"
   port: 5432
   username: postgres
@@ -129,7 +129,7 @@ database:
 # RabbitMQ configuration
 #
 rabbitmq:
-  secretName: "rabbitmq"
+  secretName: ""
   host: "rabbitmq"
   port: 5672
   managementPort: 15672

@@ -1,13 +1,15 @@
+{{- if eq .Values.authentication.secretName "" }}
 apiVersion: v1
 kind: Secret
 metadata:
-  name: {{ .Values.authentication.secretName }}
+  name: {{ include "secrets.authentication.name" . }}
   namespace: {{ .Release.Namespace }}
 type: Opaque
 data:
-{{- if .Values.authentication.github.enabled }}
-  {{- $clientId := .Values.authentication.github.clientId | required ".Values.authentication.github.clientId is required." -}}
-  {{- $clientSecret := .Values.authentication.github.clientSecret | required ".Values.authentication.github.clientSecret is required." -}}
+{{ if .Values.authentication.github.enabled }}
+  {{ $clientId := .Values.authentication.github.clientId | required ".Values.authentication.github.clientId is required." -}}
+  {{ $clientSecret := .Values.authentication.github.clientSecret | required ".Values.authentication.github.clientSecret is required." -}}
   GITHUB_CLIENT_ID: {{ $clientId }}
   GITHUB_CLIENT_SECRET: {{ $clientSecret }}
+{{ end }}
 {{- end }}

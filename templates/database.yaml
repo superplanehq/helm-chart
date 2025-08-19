@@ -1,7 +1,8 @@
+{{- if eq .Values.database.secretName "" }}
 apiVersion: v1
 kind: Secret
 metadata:
-  name: "{{ .Values.database.secretName }}"
+  name: {{ include "secrets.database.name" . }}
   namespace: "{{ .Release.Namespace }}"
   labels:
     product: semaphoreci
@@ -11,7 +12,8 @@ data:
   DB_PORT: {{ .Values.database.port | toString | b64enc }}
   DB_USERNAME: {{ .Values.database.username | b64enc }}
   DB_PASSWORD: {{ .Values.database.password | b64enc }}
-  POSTGRES_DB_SSL: {{ .Values.database.ssl | b64enc }}
+  POSTGRES_DB_SSL: {{ .Values.database.ssl | toString | b64enc }}
+{{- end }}
 {{- if .Values.database.local.enabled }}
 ---
 apiVersion: apps/v1
@@ -48,12 +50,12 @@ spec:
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.database.secretName }}
+                  name: {{ include "secrets.database.name" . }}
                   key: DB_USERNAME
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.database.secretName }}
+                  name: {{ include "secrets.database.name" . }}
                   key: DB_PASSWORD
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata
