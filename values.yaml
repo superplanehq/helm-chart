@@ -55,6 +55,10 @@ jwt:
   secretName: jwt
   secret: ""
 
+session:
+  secretName: session
+  key: ""
+
 #
 # Ingress configuration
 #

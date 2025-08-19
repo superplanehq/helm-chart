@@ -58,6 +58,8 @@ spec:
                 name: {{ .Values.encryption.secretName }}
             - secretRef:
                 name: {{ .Values.jwt.secretName }}
+            - secretRef:
+                name: {{ .Values.session.secretName }}
           env:
             - name: START_PUBLIC_API
               value: "yes"
