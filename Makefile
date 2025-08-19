@@ -3,4 +3,3 @@ helm.create:
 
 helm.cleanup:
 	rm -rf *.tgz
-	rm -rf Chart.yaml
