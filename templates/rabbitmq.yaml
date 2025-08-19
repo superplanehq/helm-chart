@@ -6,7 +6,6 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     app: rabbitmq
-    product: semaphoreci
 data:
   RABBITMQ_USER: {{ .Values.rabbitmq.username | b64enc }}
   RABBITMQ_PASSWORD: {{ .Values.rabbitmq.password | b64enc }}
@@ -29,7 +28,6 @@ spec:
     metadata:
       labels:
         app: rabbitmq
-        product: semaphoreci
     spec:
       priorityClassName: high-priority
       containers:

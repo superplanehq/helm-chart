@@ -4,8 +4,6 @@ kind: Secret
 metadata:
   name: {{ include "secrets.database.name" . }}
   namespace: "{{ .Release.Namespace }}"
-  labels:
-    product: semaphoreci
 data:
   DB_NAME: superplane
   DB_HOST: {{ .Values.database.host | b64enc }}
@@ -21,8 +19,6 @@ kind: StatefulSet
 metadata:
   name: postgres
   namespace: {{ .Release.Namespace }}
-  labels:
-    product: semaphoreci
 spec:
   serviceName: postgres
   replicas: 1
@@ -33,7 +29,6 @@ spec:
     metadata:
       labels:
         app: postgres
-        product: semaphoreci
     spec:
       priorityClassName: high-priority
       containers:
