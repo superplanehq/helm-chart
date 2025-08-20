@@ -29,7 +29,6 @@ spec:
       labels:
         app: rabbitmq
     spec:
-      priorityClassName: high-priority
       containers:
         - name: rabbitmq
           image: rabbitmq:{{ .Values.rabbitmq.local.version }}

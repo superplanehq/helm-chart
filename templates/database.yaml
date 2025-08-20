@@ -30,7 +30,6 @@ spec:
       labels:
         app: postgres
     spec:
-      priorityClassName: high-priority
       containers:
         - name: postgres
           image: postgres:{{ .Values.database.local.version }}

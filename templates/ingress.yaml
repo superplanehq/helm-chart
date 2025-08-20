@@ -57,7 +57,7 @@ spec:
           service:
             name: {{ .Release.Name }}-api
             port:
-              number: 8080
+              number: 8000
 ---
 {{- if eq $className "gce" }}
 apiVersion: networking.gke.io/v1beta1
