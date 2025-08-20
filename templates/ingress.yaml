@@ -39,7 +39,7 @@ spec:
 {{- if and $ssl.enabled (eq $ssl.type "custom") }}
   tls:
     - hosts:
-      - "*.{{ $domainName }}"
+      - "{{ $domainName }}"
       secretName: {{ $ssl.custom.secretName | required "ingress.ssl.custom.secretName is required when ingress.ssl.type is 'custom'." }}
 {{- end }}
   defaultBackend:
@@ -48,7 +48,7 @@ spec:
       port:
         number: 8000
   rules:
-  - host: "app.{{ $domainName }}"
+  - host: "{{ $domainName }}"
     http:
       paths:
       - path: /
