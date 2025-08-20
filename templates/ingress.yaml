@@ -47,17 +47,6 @@ spec:
       name: {{ .Release.Name }}-api
       port:
         number: 8000
-  rules:
-  - host: "{{ $domainName }}"
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: {{ .Release.Name }}-api
-            port:
-              number: 8000
 ---
 {{- if eq $className "gce" }}
 apiVersion: networking.gke.io/v1beta1

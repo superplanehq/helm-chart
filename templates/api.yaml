@@ -9,9 +9,10 @@ metadata:
     cloud.google.com/neg: '{"ingress": true}'
 {{- end }}
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
-    app: {{ .Release.Name }}-api
+    app: superplane
+    service: {{ .Release.Name }}-api
   ports:
     - name: http
       port: 8000
