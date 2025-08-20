@@ -66,7 +66,7 @@ spec:
             - name: APPLICATION_NAME
               value: superplane
             - name: DB_POOL_SIZE
-              value: {{ .Values.workers.dbPoolSize }}
+              value: {{ .Values.workers.dbPoolSize | toString }}
 
           securityContext:
             privileged: false
