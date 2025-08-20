@@ -48,7 +48,7 @@ spec:
       port:
         number: 8000
 ---
-{{- if eq $className "gce" }}
+{{- if and (eq $className "gce") (eq $ssl.enabled) }}
 apiVersion: networking.gke.io/v1beta1
 kind: FrontendConfig
 metadata:
