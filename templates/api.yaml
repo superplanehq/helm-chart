@@ -69,7 +69,7 @@ spec:
             - name: START_INTERNAL_API
               value: "yes"
             - name: START_GRPC_GATEWAY
-              value: "true"
+              value: "yes"
             - name: PUBLIC_API_BASE_PATH
               value: "/api/v1"
             - name: START_WEB_SERVER
