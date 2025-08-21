@@ -72,6 +72,10 @@ spec:
               value: "true"
             - name: PUBLIC_API_BASE_PATH
               value: "/api/v1"
+            - name: START_WEB_SERVER
+              value: "yes"
+            - name: WEB_BASE_PATH
+              value: "/app"
             - name: SWAGGER_BASE_PATH
               value: "/app/api/swagger"
             - name: RBAC_MODEL_PATH
