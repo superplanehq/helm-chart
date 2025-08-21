@@ -4,4 +4,4 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.domain.configMapName }}
 data:
-  BASE_URL: {{ $domain }}
+  BASE_URL: https://{{ $domain }}
