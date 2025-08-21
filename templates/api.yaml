@@ -70,10 +70,12 @@ spec:
               value: "yes"
             - name: START_GRPC_GATEWAY
               value: "yes"
-            - name: PUBLIC_API_BASE_PATH
-              value: "/api/v1"
+            - name: START_EVENT_DISTRIBUTER
+              value: "yes"
             - name: START_WEB_SERVER
               value: "yes"
+            - name: PUBLIC_API_BASE_PATH
+              value: "/api/v1"
             - name: WEB_BASE_PATH
               value: "/app"
             - name: SWAGGER_BASE_PATH
