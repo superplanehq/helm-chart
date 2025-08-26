@@ -49,6 +49,9 @@ spec:
               value: "yes"
             - name: START_STAGE_EVENT_APPROVED_CONSUMER
               value: "yes"
+            #  TODO: keep only START_CONSUMERS after merge of PRs
+            - name: START_CONSUMERS
+              value: "yes"
             - name: START_EXECUTIONS_POLLER
               value: "yes"
             - name: START_EXECUTION_RESOURCE_POLLER
