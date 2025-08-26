@@ -47,7 +47,7 @@ spec:
               value: "yes"
             - name: START_TIME_WINDOW_WORKER
               value: "yes"
-            - name: START_STAGE_EVENT_APPROVED_CONSUMER
+            - name: START_CONSUMERS
               value: "yes"
             - name: START_EXECUTIONS_POLLER
               value: "yes"
