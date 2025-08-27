@@ -59,6 +59,8 @@ spec:
               value: "yes"
             - name: START_PENDING_EXECUTIONS_WORKER
               value: "yes"
+            - name: START_HARD_DELETION_WORKER
+              value: "yes"
             - name: RBAC_MODEL_PATH
               value: /app/rbac/rbac_model.conf
             - name: RBAC_ORG_POLICY_PATH
