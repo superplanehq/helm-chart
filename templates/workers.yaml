@@ -65,6 +65,8 @@ spec:
               value: "yes"
             - name: START_EVENT_DELETION_WORKER
               value: "yes"
+            - name: START_ALERT_WORKER
+              value: "yes"
             - name: RBAC_MODEL_PATH
               value: /app/rbac/rbac_model.conf
             - name: RBAC_ORG_POLICY_PATH
