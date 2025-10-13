@@ -40,6 +40,10 @@ authentication:
     enabled: true
     clientId: ""
     clientSecret: ""
+  google:
+    enabled: true
+    clientId: ""
+    clientSecret: ""
 
 #
 # Key used to encrypt sensitive values before storing them in the database.
