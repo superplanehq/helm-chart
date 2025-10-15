@@ -40,6 +40,8 @@ spec:
                 name: {{ include "secrets.encryption.name" . }}
             - secretRef:
                 name: {{ include "secrets.jwt.name" . }}
+            - secretRef:
+                name: {{ include "secrets.email.name" . }}
           env:
             - name: START_PENDING_EVENTS_WORKER
               value: "yes"
@@ -77,6 +79,10 @@ spec:
               value: superplane
             - name: DB_POOL_SIZE
               value: "{{ .Values.workers.dbPoolSize }}"
+            - name: EMAIL_FROM_NAME
+              value: "{{ .Values.email.fromName }}"
+            - name: EMAIL_FROM_ADDRESS
+              value: "{{ .Values.email.fromAddress }}"
 
           securityContext:
             privileged: false

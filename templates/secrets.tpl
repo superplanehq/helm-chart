@@ -45,3 +45,11 @@
 {{- .Values.database.secretName }}
 {{- end }}
 {{- end }}
+
+{{- define "secrets.email.name" }}
+{{- if eq .Values.email.secretName "" }}
+{{- printf "%s-email" .Release.Name }}
+{{- else }}
+{{- .Values.email.secretName }}
+{{- end }}
+{{- end }}
