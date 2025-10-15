@@ -83,6 +83,8 @@ spec:
               value: "{{ .Values.email.fromName }}"
             - name: EMAIL_FROM_ADDRESS
               value: "{{ .Values.email.fromAddress }}"
+            - name: TEMPLATE_DIR
+              value: /app/templates
 
           securityContext:
             privileged: false
