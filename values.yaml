@@ -144,3 +144,13 @@ rabbitmq:
     enabled: true
     version: 3.13.7-management-alpine
     size: 2Gi
+
+#
+# Email configuration
+#
+email:
+  secretName: ""
+  sendgridApiKey: ""
+  fromName: ""
+  fromAddress: ""
+  

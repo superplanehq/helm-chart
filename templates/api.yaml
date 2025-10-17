@@ -90,6 +90,8 @@ spec:
               value: superplane
             - name: DB_POOL_SIZE
               value: "{{ .Values.api.dbPoolSize }}"
+            - name: TEMPLATE_DIR
+              value: /app/templates
 
           ports:
             - name: http
